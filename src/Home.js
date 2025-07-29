@@ -3,8 +3,8 @@ import BlogList from './BlogList';
 
 const Home = () => {
     const [blogs, setBlogs] = useState(null);
+    const [isPending, setIsPending] = useState(true);
 
-    // Fetch blogs from the server
     useEffect(() => {
         fetch('http://localhost:8000/blogs')
             .then(res => {
@@ -13,12 +13,13 @@ const Home = () => {
             .then(data => {
                 console.log(data);
                 setBlogs(data);
-            })
+                setIsPending(false);
+            });
     }, []);
 
     return (
         <div className="home">
-            {/* Render BlogList only if blogs are available */}
+            {isPending && <div>Loading...</div>}
             {blogs && <BlogList blogs={blogs} title="All Blogs!" />}
         </div>
     );
