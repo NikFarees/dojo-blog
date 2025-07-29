@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import BlogList from './BlogList';
 
 const Home = () => {
@@ -12,6 +12,14 @@ const Home = () => {
         const newBlogs = blogs.filter(blog => blog.id !== id);
         setBlogs(newBlogs);
     }
+
+    // This useEffect is just for demonstration purposes
+    // It logs when the component mounts and whenever the blogs state changes
+    // In a real application, you might fetch data from an API here
+    useEffect(() => {
+        console.log('use effect ran');
+        console.log(blogs);
+    });
 
     return (
         <div className="home">
